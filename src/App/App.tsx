@@ -1,18 +1,15 @@
-import { FC } from 'react';
-import './App.css';
-import ShowPosts from '../pages/ShowPosts/ShowPosts';
-import NewPosts from '../pages/NewPosts/NewPosts';
+import { FC } from "react";
+import "./App.css";
+import ShowPosts from "../components/ShowPosts/ShowPosts";
+import NewPosts from "../components/NewPosts/NewPosts";
 
-const App:FC = () => {
+const App: FC = () => {
   return (
     <div className="app">
-      {/* TODO - Swith to router*/}
       <ShowPosts />
-      {/* <NewPosts /> */}
-      
-     
+      <NewPosts />
     </div>
   );
-}
+};
 
 export default App;
