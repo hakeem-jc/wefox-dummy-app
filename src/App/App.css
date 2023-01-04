@@ -2,3 +2,8 @@
   display: flex;
   justify-content: center;
 }
+
+.global__title {
+  font-weight: 500;
+  font-size: 2rem;
+}
