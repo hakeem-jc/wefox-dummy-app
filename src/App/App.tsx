@@ -6,8 +6,8 @@ import NewPosts from "../components/NewPosts/NewPosts";
 const App: FC = () => {
   return (
     <div className="app">
-      <ShowPosts />
       <NewPosts />
+      <ShowPosts />
     </div>
   );
 };

@@ -9,7 +9,7 @@ const ShowPosts: FC = () => {
       <nav className="show_posts__header">
         <h1 className="show_posts__title global-title">Posts</h1>
 
-        <Button text={"Next"} type={"button"} />
+        <Button text={"New"} type={"button"} />
       </nav>
 
       {/* TODO - Map this to multiple posts */}
