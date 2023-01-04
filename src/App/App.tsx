@@ -7,8 +7,8 @@ const App:FC = () => {
   return (
     <div className="app">
       {/* TODO - Swith to router*/}
-      {/* <ShowPosts /> */}
-      <NewPosts />
+      <ShowPosts />
+      {/* <NewPosts /> */}
       
      
     </div>
