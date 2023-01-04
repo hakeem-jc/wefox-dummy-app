@@ -1,0 +1,18 @@
+.ShowPosts__header {
+    display: flex;
+}
+
+.ShowsPosts__title {
+    width: 50%;
+    line-height: 2rem;
+}
+
+.ShowsPosts__options {
+    width: 50%;
+    line-height: 2.5rem;
+}
+
+.ShowsPosts__options li {
+    list-style: none;
+    font-size: 14px;
+}
