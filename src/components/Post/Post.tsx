@@ -4,8 +4,8 @@ import temp from '../../images/pic.jpg';
 
 const Post:FC = () => {
     return (
-        <div className="">
-            <img src={temp} alt="Post"/>
+        <div className="post">
+            <img src={temp} className="post__image" alt="Post"/>
 
         </div>
     );

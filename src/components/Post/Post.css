@@ -1,2 +1,10 @@
 /* TODO */
 /* Switch to styled components */
+.post {
+    width: 80%;
+}
+
+.post__image {
+    width: 100%;
+    border-radius: 8px;
+}

@@ -1,9 +1,10 @@
+import { FC } from 'react';
 import './App.css';
 import ShowPosts from '../pages/ShowPosts/ShowPosts';
 
-function App() {
+const App:FC = () => {
   return (
-    <div className="App">
+    <div className="app">
       {/* TODO - Swith to router and components */}
       <ShowPosts />
     </div>

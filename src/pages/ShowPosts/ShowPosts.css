@@ -1,18 +1,21 @@
-.ShowPosts__header {
+.show_posts {
+   width: 100%;
+   padding-top: 1rem;
+}
+
+.show_posts__header {
+    width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.ShowsPosts__title {
+.show_posts__title {
     width: 50%;
-    line-height: 2rem;
 }
 
-.ShowsPosts__options {
-    width: 50%;
-    line-height: 2.5rem;
-}
-
-.ShowsPosts__options li {
-    list-style: none;
-    font-size: 14px;
+.show_posts__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
