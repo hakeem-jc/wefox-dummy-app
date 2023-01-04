@@ -1,22 +1,11 @@
 .show_posts {
    width: 100%;
-   padding-top: 1rem;
-}
-
-.show_posts__header {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.show_posts__title {
-    width: 50%;
+   padding-top: 2rem;
 }
 
 .show_posts__container {
-    width: 100%;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
 }
