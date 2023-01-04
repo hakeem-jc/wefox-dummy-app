@@ -19,7 +19,7 @@ const onSubmit = (values: Values, helpers: FormikHelpers<Values>) => {
 const NewPosts: FC = () => {
   return (
     <div className="NewPosts">
-      <h1 className="global-title">New</h1>
+      <h1 className="NewPosts__title">New</h1>
       <Formik
         initialValues={{
           title: "",
