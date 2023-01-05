@@ -23,6 +23,7 @@ const onSubmit = (values: FormValues, helpers: FormikHelpers<FormValues>) => {
     alert("New Post Created");
     helpers.setSubmitting(false);
     helpers.resetForm({ values: initialValues });
+    document.location.reload();
   });
 };
 
