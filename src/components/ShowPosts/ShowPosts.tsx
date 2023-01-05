@@ -8,7 +8,7 @@ const ShowPosts: FC = () => {
 
   // TODO - Add Loading screen
   useEffect(() => {
-    fetch('http://localhost:8080/api/v1/posts')
+    fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/posts`)
     .then(response => response.json())
     .then(data => setPosts(data))
     .catch(error => {
