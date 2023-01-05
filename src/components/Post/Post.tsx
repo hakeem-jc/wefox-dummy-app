@@ -1,17 +1,25 @@
 import { FC } from "react";
 import './Post.css';
+import fallback from '../../image/fallback.png';
 import Button from "../Button/Button";
 import { PostProps } from "../../interfaces/post";
 import { format_date } from "../../helpers";
+
 
 const Post:FC<PostProps> = (props:PostProps) => {  
 
     let created_at = format_date(props.created_at);
     let updated_at = format_date(props.updated_at);
 
+    let setDefaultImage = (ev:any) =>{
+        ev.target.src = fallback;
+    }
+
     return (
         <div className="post">
-            <img src={props.image_url} className="post__image" alt="Post"/>
+            
+            <img src={props.image_url} className="post__image" onError={setDefaultImage} alt="Post"/>
+            
             
             <h3 className="post__title">{props.title}</h3>
             <p className="post__text">{props.content}</p>
