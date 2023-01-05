@@ -4,16 +4,23 @@ import './Modal.css';
 
 interface ModalProps {
     isOpen: boolean;
-    children: ReactNode
+    children: ReactNode;
+    close: () => void;
 }
 
 const Modal:FC<ModalProps> = (props) => {
+
     return (
-        <section className="modal">
-            <div className="modal__content">
-                {props.children}
-            </div>
-        </section>
+        <>
+            {props.isOpen &&
+                <section className="modal">
+                    <div className="modal__content">
+                        <span className="modal__close-btn" onClick={()=>props.close()}>&times;</span>
+                        {props.children}
+                    </div>
+                </section>
+            }
+        </>
     );
 }
 

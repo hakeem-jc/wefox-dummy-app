@@ -1,5 +1,4 @@
 .modal {
-    display: none; 
     position: fixed;
     z-index: 1;
     left: 0;
@@ -8,7 +7,7 @@
     height: 100%; 
     overflow: auto;
     background-color: rgb(0,0,0); /*Fallback Color*/
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal__content {
@@ -17,4 +16,18 @@
     padding: 2rem;
     border-radius: 4px;
     width: 80%;
+  }
+
+  .modal__close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .modal__close-btn:hover,
+  .modal__close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
   }
