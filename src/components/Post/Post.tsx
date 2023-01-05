@@ -4,7 +4,8 @@ import fallback from '../../images/fallback.png';
 import Button from "../Button/Button";
 import { PostProps } from "../../interfaces/post";
 import { format_date } from "../../common/helpers";
-
+import axios from 'axios';
+import { API_URL } from "../../common/constants";
 
 const Post:FC<PostProps> = (props:PostProps) => {  
 
@@ -13,6 +14,18 @@ const Post:FC<PostProps> = (props:PostProps) => {
 
     let setDefaultImage = (ev:any) =>{
         ev.target.src = fallback;
+    }
+
+    let remove = (id:number) => {
+        axios.delete(`${API_URL}/${id}`)
+        .then(() => {
+            alert("Post deleted!");
+            document.location.reload();
+        });
+    }
+
+    let update = () => {
+
     }
 
     return (
@@ -25,8 +38,8 @@ const Post:FC<PostProps> = (props:PostProps) => {
             <p className="post__text">{props.content}</p>
 
             <div className="post__button_container">
-                <Button text={"Update"} type={"button"}/>
-                <Button text={"Delete"} type={"button"}/>
+                <Button text={"Update"} type={"button"} onClick={()=>update()}/>
+                <Button text={"Delete"} type={"button"} onClick={()=>remove(props.id)}/>
             </div>
 
             {/* TODO - Add Map */}
