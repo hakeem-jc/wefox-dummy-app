@@ -10,4 +10,4 @@ export const show = async (id:number) => {
             .catch(error => {
                 console.error(error);
             })
-        }
+}

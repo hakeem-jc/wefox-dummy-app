@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import "./Post.css";
 import fallback from "../../images/fallback.png";
 import Button from "../Button/Button";
@@ -9,10 +9,13 @@ import { API_URL } from "../../common/constants";
 import { show } from "../../api/requests";
 import Modal from "../Modal/Modal";
 import PostForm from "../PostForm/PostForm";
+import { useAppSelector, useAppDispatch } from "../../common/hooks";
 
 const Post: FC<PostProps> = (props: PostProps) => {
+  const [openModal, setOpenModal] = useState(false);
   let created_at = format_date(props.created_at);
   let updated_at = format_date(props.updated_at);
+  
 
   let setDefaultImage = (ev: any) => {
     ev.target.src = fallback;
@@ -27,13 +30,14 @@ const Post: FC<PostProps> = (props: PostProps) => {
 
   let update = async (id: number) => {
     let post = await show(id);
+    setOpenModal(true);
     console.log(post);
     // Show Modal and pass data
   };
 
   return (
     <div className="post">
-      <Modal isOpen={true}>
+      <Modal isOpen={openModal} close={()=>setOpenModal(false)}>
         <PostForm />
       </Modal>
 

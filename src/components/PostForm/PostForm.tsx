@@ -5,6 +5,7 @@ import Button from "../Button/Button";
 import axios from "axios";
 import { API_URL } from "../../common/constants";
 import { FormValues } from "../../interfaces/form_values";
+import { useAppSelector } from "../../common/hooks";
 
 // Set initial values to value from show if its an update
 const initialValues = {
@@ -30,6 +31,10 @@ const onSubmit = (values: FormValues, helpers: FormikHelpers<FormValues>) => {
 };
 
 const PostForm: FC = () => {
+  const current_post = useAppSelector(state => state.current_post);
+  // Choose Post Type - New or Update
+  // Load current_post as initial values if its update
+
   return (
     <div className="post-form">
       <h1 className="post-form__title">New</h1>
