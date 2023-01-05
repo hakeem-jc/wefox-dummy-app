@@ -38,10 +38,10 @@ const NewPosts: FC = () => {
           <label htmlFor="content">Content</label>
           <Field id="content" name="content" className="NewPosts__input" />
 
-          <label htmlFor="lat">lat</label>
+          <label htmlFor="lat">Latitude</label>
           <Field id="lat" name="lat" className="NewPosts__input" />
 
-          <label htmlFor="long">long</label>
+          <label htmlFor="long">Longitude</label>
           <Field id="long" name="long" className="NewPosts__input" />
 
           <label htmlFor="image_url">Image URL</label>
