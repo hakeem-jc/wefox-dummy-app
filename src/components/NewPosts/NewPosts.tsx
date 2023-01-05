@@ -2,18 +2,28 @@ import { FC } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import "./NewPosts.css";
 import Button from "../Button/Button";
+import axios from "axios";
+import { create_url } from "../../common/constants";
+import { FormValues } from "../../interfaces/form_values";
 
-interface Values {
-  title: string;
-  content: string;
-  latitude: string;
-  longitude: string;
-  image_url: string;
-}
+const initialValues = {
+  title: "",
+  content: "",
+  lat: "",
+  long: "",
+  image_url: "",
+};
 
-const onSubmit = (values: Values, helpers: FormikHelpers<Values>) => {
-  console.log({ values, helpers });
-  setTimeout(() => helpers.setSubmitting(false), 2000);
+const onSubmit = (values: FormValues, helpers: FormikHelpers<FormValues>) => {
+  console.log(helpers)
+  
+  axios.post(create_url,values).then((_response) => {
+    // TODO - Add response to memory
+    
+    alert('New Post Created');
+    helpers.setSubmitting(false);
+    helpers.resetForm({values:initialValues});
+  });
 };
 
 const NewPosts: FC = () => {
@@ -21,13 +31,7 @@ const NewPosts: FC = () => {
     <div className="NewPosts">
       <h1 className="NewPosts__title">New</h1>
       <Formik
-        initialValues={{
-          title: "",
-          content: "",
-          latitude: "",
-          longitude: "",
-          image_url: "",
-        }}
+        initialValues={initialValues}
         onSubmit={onSubmit}
       >
         <Form className="NewPosts__form">
@@ -37,11 +41,11 @@ const NewPosts: FC = () => {
           <label htmlFor="content">Content</label>
           <Field id="content" name="content" className="NewPosts__input" />
 
-          <label htmlFor="latitude">Latitude</label>
-          <Field id="latitude" name="latitude" className="NewPosts__input" />
+          <label htmlFor="lat">lat</label>
+          <Field id="lat" name="lat" className="NewPosts__input" />
 
-          <label htmlFor="longitude">Longitude</label>
-          <Field id="longitude" name="longitude" className="NewPosts__input" />
+          <label htmlFor="long">long</label>
+          <Field id="long" name="long" className="NewPosts__input" />
 
           <label htmlFor="image_url">Image URL</label>
           <Field id="image_url" name="image_url" className="NewPosts__input" />

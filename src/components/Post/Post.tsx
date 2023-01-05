@@ -3,7 +3,7 @@ import './Post.css';
 import fallback from '../../images/fallback.png';
 import Button from "../Button/Button";
 import { PostProps } from "../../interfaces/post";
-import { format_date } from "../../helpers";
+import { format_date } from "../../common/helpers";
 
 
 const Post:FC<PostProps> = (props:PostProps) => {  
