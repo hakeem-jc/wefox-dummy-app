@@ -3,7 +3,7 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 import "./NewPosts.css";
 import Button from "../Button/Button";
 import axios from "axios";
-import { create_url } from "../../common/constants";
+import { API_URL } from "../../common/constants";
 import { FormValues } from "../../interfaces/form_values";
 
 const initialValues = {
@@ -15,14 +15,14 @@ const initialValues = {
 };
 
 const onSubmit = (values: FormValues, helpers: FormikHelpers<FormValues>) => {
-  console.log(helpers)
-  
-  axios.post(create_url,values).then((_response) => {
+  console.log(helpers);
+
+  axios.post(API_URL, values).then((_response) => {
     // TODO - Add response to memory
-    
-    alert('New Post Created');
+
+    alert("New Post Created");
     helpers.setSubmitting(false);
-    helpers.resetForm({values:initialValues});
+    helpers.resetForm({ values: initialValues });
   });
 };
 
@@ -30,10 +30,7 @@ const NewPosts: FC = () => {
   return (
     <div className="NewPosts">
       <h1 className="NewPosts__title">New</h1>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-      >
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form className="NewPosts__form">
           <label htmlFor="title">Title</label>
           <Field id="title" name="title" className="NewPosts__input" />
