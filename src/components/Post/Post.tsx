@@ -1,59 +1,77 @@
 import { FC } from "react";
-import './Post.css';
-import fallback from '../../images/fallback.png';
+import "./Post.css";
+import fallback from "../../images/fallback.png";
 import Button from "../Button/Button";
 import { PostProps } from "../../interfaces/post";
 import { format_date } from "../../common/helpers";
-import axios from 'axios';
+import axios from "axios";
 import { API_URL } from "../../common/constants";
+import { show } from "../../api/requests";
+import Modal from "../Modal/Modal";
+import PostForm from "../PostForm/PostForm";
 
-const Post:FC<PostProps> = (props:PostProps) => {  
+const Post: FC<PostProps> = (props: PostProps) => {
+  let created_at = format_date(props.created_at);
+  let updated_at = format_date(props.updated_at);
 
-    let created_at = format_date(props.created_at);
-    let updated_at = format_date(props.updated_at);
+  let setDefaultImage = (ev: any) => {
+    ev.target.src = fallback;
+  };
 
-    let setDefaultImage = (ev:any) =>{
-        ev.target.src = fallback;
-    }
+  let remove = (id: number) => {
+    axios.delete(`${API_URL}/${id}`).then(() => {
+      alert("Post deleted!");
+      document.location.reload();
+    });
+  };
 
-    let remove = (id:number) => {
-        axios.delete(`${API_URL}/${id}`)
-        .then(() => {
-            alert("Post deleted!");
-            document.location.reload();
-        });
-    }
+  let update = async (id: number) => {
+    let post = await show(id);
+    console.log(post);
+    // Show Modal and pass data
+  };
 
-    let update = () => {
+  return (
+    <div className="post">
+      <Modal isOpen={true}>
+        <PostForm />
+      </Modal>
 
-    }
+      <img
+        src={props.image_url}
+        className="post__image"
+        onError={setDefaultImage}
+        alt="Post"
+      />
 
-    return (
-        <div className="post">
-            
-            <img src={props.image_url} className="post__image" onError={setDefaultImage} alt="Post"/>
-            
-            
-            <h3 className="post__title">{props.title}</h3>
-            <p className="post__text">{props.content}</p>
+      <h3 className="post__title">{props.title}</h3>
+      <p className="post__text">{props.content}</p>
 
-            <div className="post__button_container">
-                <Button text={"Update"} type={"button"} onClick={()=>update()}/>
-                <Button text={"Delete"} type={"button"} onClick={()=>remove(props.id)}/>
-            </div>
+      <div className="post__button_container">
+        <Button
+          text={"Update"}
+          type={"button"}
+          onClick={() => update(props.id)}
+        />
+        <Button
+          text={"Delete"}
+          type={"button"}
+          onClick={() => remove(props.id)}
+        />
+      </div>
 
-            {/* TODO - Add Map */}
-            <div className="post__data">
-                <p className="post__data_text">Lat: {props.lat}</p>
-                <p className="post__data_text">Long: {props.long}</p>
-            </div>
+      {/* TODO - Add Map */}
+      <div className="post__data">
+        <p className="post__data_text">Lat: {props.lat}</p>
+        <p className="post__data_text">Long: {props.long}</p>
+      </div>
 
-            <div className="post__data">
-                <p className="post__data_text">Posted: {created_at}</p>
-                <p className="post__data_text">Updated: {updated_at}</p>
-            </div>
-        </div>
-    );
-}
+      <div className="post__data">
+        <p className="post__data_text">Posted: {created_at}</p>
+        <p className="post__data_text">Updated: {updated_at}</p>
+      </div>
+    </div>
+  );
+};
 
 export default Post;

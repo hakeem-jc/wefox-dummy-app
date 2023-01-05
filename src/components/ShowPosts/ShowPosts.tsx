@@ -18,7 +18,7 @@ const ShowPosts: FC = () => {
     })
     .catch(error => {
       console.error(error);
-    })
+    });
   },[]);
 
   const Posts = (posts !== null && posts !== undefined && posts.length !== 0) ?
