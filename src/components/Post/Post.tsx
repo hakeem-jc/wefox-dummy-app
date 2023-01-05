@@ -1,6 +1,6 @@
 import { FC } from "react";
 import './Post.css';
-import fallback from '../../image/fallback.png';
+import fallback from '../../images/fallback.png';
 import Button from "../Button/Button";
 import { PostProps } from "../../interfaces/post";
 import { format_date } from "../../helpers";

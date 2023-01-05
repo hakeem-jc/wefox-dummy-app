@@ -5,24 +5,31 @@ import { PostProps } from '../../interfaces/post';
 
 const ShowPosts: FC = () => {
   const [posts, setPosts] = useState<PostProps[]>();
+  const [isLoading, setIsLoading] = useState(true);
 
-  // TODO - Add Loading screen
+  
+  // TODO Switch to axzios and write why
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/posts`)
     .then(response => response.json())
-    .then(data => setPosts(data))
+    .then(data => {
+        setPosts(data);
+        setIsLoading(false);
+    })
     .catch(error => {
       console.error(error);
     })
   },[]);
 
-// TODO - Add empty posts check
-  const Posts = posts !== null && posts !== undefined ?
+  const Posts = (posts !== null && posts !== undefined && posts.length !== 0) ?
               posts.map((post,index) => {
                 return <Post {...post} key={index}/>;
               })
               :
-              <div></div>;
+              <h1>No Posts, Add Some to Get Started</h1>;
+
+  // TODO - Add Loading screen
+  if (isLoading) return <div className="show_posts__loader_container"></div>;    
 
   return (
     <main className="show_posts">     
