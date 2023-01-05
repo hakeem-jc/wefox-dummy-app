@@ -2,19 +2,19 @@ import { FC, useEffect, useState } from "react";
 import "./ShowPosts.css";
 import Post from "../Post/Post";
 import { PostProps } from '../../interfaces/post';
+import axios from "axios";
 
 const ShowPosts: FC = () => {
   const [posts, setPosts] = useState<PostProps[]>();
   const [isLoading, setIsLoading] = useState(true);
 
   
-  // TODO Switch to axzios and write why
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/posts`)
-    .then(response => response.json())
-    .then(data => {
-        setPosts(data);
-        setIsLoading(false);
+    
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/posts`)
+    .then(response => {
+      setPosts(response.data);
+      setIsLoading(false);
     })
     .catch(error => {
       console.error(error);
