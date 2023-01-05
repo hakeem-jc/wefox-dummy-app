@@ -28,7 +28,6 @@ const ShowPosts: FC = () => {
               :
               <h1>No Posts, Add Some to Get Started</h1>;
 
-  // TODO - Add Loading screen
   if (isLoading) return <div className="show_posts__loader_container"></div>;    
 
   return (
