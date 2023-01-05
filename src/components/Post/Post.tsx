@@ -1,28 +1,30 @@
 import { FC } from "react";
 import './Post.css';
-import temp from '../../images/pic.jpg';
 import Button from "../Button/Button";
+import { PostProps } from "../../interfaces/post";
 
-const Post:FC = () => {
+
+const Post:FC<PostProps> = (props:PostProps) => {
     return (
         <div className="post">
-            <img src={temp} className="post__image" alt="Post"/>
+            <img src={props.image_url} className="post__image" alt="Post"/>
             
-            <h3 className="post__title">Berlin</h3>
-            <p className="post__text">Berlin is the capital and the largest city 
-            of Germany as well as one of its 16
-            constituent states. With a population 
-            of approximately 3.7 million, 
-            Berlin is the second...</p>
+            <h3 className="post__title">{props.title}</h3>
+            <p className="post__text">{props.content}</p>
 
             <div className="post__button_container">
                 <Button text={"Update"} type={"button"}/>
                 <Button text={"Delete"} type={"button"}/>
             </div>
-
+            {/* TODO - Add Map */}
             <div className="post__data">
-                <p className="post__data_text">Posted: 3/1/2023 11:00 pm</p>
-                <p className="post__data_text">Updated: 3/1/2023 11:11 pm</p>
+                <p className="post__data_text">Lat: {props.lat}</p>
+                <p className="post__data_text">Long: {props.long}</p>
+            </div>
+            {/* TODO - Format date */}
+            <div className="post__data">
+                <p className="post__data_text">Posted: {props.created_at}</p>
+                <p className="post__data_text">Updated: {props.updated_at}</p>
             </div>
         </div>
     );
