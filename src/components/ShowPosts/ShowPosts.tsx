@@ -10,7 +10,7 @@ const ShowPosts: FC = () => {
 
   
   useEffect(() => {
-    
+    // TODO -  Add redux toolkit to make state global then export this to api folder
     axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/posts`)
     .then(response => {
       setPosts(response.data);
