@@ -1,13 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../../common/store';
-
+// import { FormValues } from '../../interfaces/form_values';
 
 const setPostSlice = createSlice({
     name: 'post',
-    initialState: {},
+    initialState:  {
+        id: 0,
+        title: "",
+        content: "",
+        lat: "",
+        long: "",
+        image_url: "",
+        created_at: "",
+        updated_at: ""
+    },
     reducers: {
-        setPost(_state,action){
+        setPost(_state,action:PayloadAction){
             return action.payload;
         }
     }

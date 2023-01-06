@@ -4,41 +4,48 @@ import "./PostForm.css";
 import Button from "../Button/Button";
 import axios from "axios";
 import { API_URL } from "../../common/constants";
-import { FormValues } from "../../interfaces/form_values";
+// import { FormValues } from "../../interfaces/form_values";
 import { useAppSelector } from "../../common/hooks";
-
-// Set initial values to value from show if its an update
-const initialValues = {
-  title: "",
-  content: "",
-  lat: "",
-  long: "",
-  image_url: "",
-};
-
-const onSubmit = (values: FormValues, helpers: FormikHelpers<FormValues>) => {
-  console.log(helpers);
-
-  axios.post(API_URL, values).then((_response) => {
-    // TODO - Add response to memory
-    // TODO - Pass function to determine if it should be a new or an update
-
-    alert("New Post Created");
-    helpers.setSubmitting(false);
-    helpers.resetForm({ values: initialValues });
-    document.location.reload();
-  });
-};
+import { FormType } from "../../interfaces/form_values";
 
 const PostForm: FC = () => {
   const current_post = useAppSelector(state => state.current_post);
-  // Choose Post Type - New or Update
-  // Load current_post as initial values if its update
+  const form_type = useAppSelector(state => state.form_type);
+
+  const onSubmit = (values: any, helpers: FormikHelpers<any>) => {
+    console.log(helpers);
+    if (form_type === FormType.NEW){
+      // TODO - Check values being sent vs the actual thing
+      axios.post(API_URL, values).then((_response) => {
+        // TODO - Add to memory 
+        alert("New Post Created");
+        helpers.setSubmitting(false);
+        helpers.resetForm({ values: current_post  });
+        document.location.reload();
+      });
+    } else {
+      
+      let payload = {
+        title:values.title,
+        content: values.content,
+        lat: values.lat,
+        long: values.long,
+        image_url: values.image_url
+      };
+
+      axios.put(`${API_URL}/${current_post.id}`,payload).then((response) => {
+        // TODO - Add to memory 
+        alert("Post Updated");
+        helpers.setSubmitting(false);
+      });
+    }
+  };
 
   return (
     <div className="post-form">
+      
       <h1 className="post-form__title">New</h1>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik initialValues={current_post} onSubmit={onSubmit}>
         <Form className="post-form__form">
           <label htmlFor="title">Title</label>
           <Field id="title" name="title" className="post-form__input" />
@@ -55,7 +62,7 @@ const PostForm: FC = () => {
           <label htmlFor="image_url">Image URL</label>
           <Field id="image_url" name="image_url" className="post-form__input" />
 
-          <Button text="Create" type="submit" />
+          <Button text={form_type === FormType.NEW ? "Create":"Update"} type="submit" />          
         </Form>
       </Formik>
     </div>

@@ -9,9 +9,13 @@ import { API_URL } from "../../common/constants";
 import { show } from "../../api/requests";
 import Modal from "../Modal/Modal";
 import PostForm from "../PostForm/PostForm";
-import { useAppSelector, useAppDispatch } from "../../common/hooks";
+import { useAppDispatch } from "../../common/hooks";
+import { setFormType } from "../../features/form/formSlice";
+import { FormType } from "../../interfaces/form_values";
+import { setPost } from "../../features/post/postSlice";
 
 const Post: FC<PostProps> = (props: PostProps) => {
+  const dispatch = useAppDispatch();
   const [openModal, setOpenModal] = useState(false);
   let created_at = format_date(props.created_at);
   let updated_at = format_date(props.updated_at);
@@ -29,10 +33,11 @@ const Post: FC<PostProps> = (props: PostProps) => {
   };
 
   let update = async (id: number) => {
+    // TDODO - Switch to thunk
     let post = await show(id);
+    dispatch(setFormType(FormType.UPDATE));
+    dispatch(setPost(post));
     setOpenModal(true);
-    console.log(post);
-    // Show Modal and pass data
   };
 
   return (
