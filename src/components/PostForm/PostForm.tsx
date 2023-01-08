@@ -9,6 +9,7 @@ import { useAppSelector } from "../../common/hooks";
 import { FormType } from "../../interfaces/form_values";
 import * as yup from 'yup';
 import { create } from "../../api/create";
+import { update } from "../../api/update";
 const isUrl = require("is-valid-http-url");
 
 const PostForm: FC = () => {
@@ -20,20 +21,7 @@ const PostForm: FC = () => {
     if (form_type === FormType.NEW){
       create(values, helpers,current_post);
     } else {
-      
-      let payload = {
-        title:values.title,
-        content: values.content,
-        lat: values.lat,
-        long: values.long,
-        image_url: values.image_url
-      };
-
-      axios.put(`${API_URL}/${current_post.id}`,payload).then((response) => {
-        // TODO - Add to memory 
-        alert("Post Updated");
-        helpers.setSubmitting(false);
-      });
+      update(values, helpers,current_post);
     }
   };
 
