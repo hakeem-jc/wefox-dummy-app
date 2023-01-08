@@ -4,18 +4,20 @@ import fallback from "../../images/fallback.png";
 import Button from "../Button/Button";
 import { PostProps } from "../../interfaces/post";
 import { format_date } from "../../common/helpers";
-import axios from "axios";
-import { API_URL } from "../../common/constants";
 import { show } from "../../api/show";
 import Modal from "../Modal/Modal";
 import PostForm from "../PostForm/PostForm";
-import { useAppDispatch } from "../../common/hooks";
+import { useAppDispatch,useAppSelector } from "../../common/hooks";
 import { setFormType } from "../../features/form/formSlice";
 import { FormType } from "../../interfaces/form_values";
 import { setPost } from "../../features/post/postSlice";
+import { remove } from "../../api/remove";
+import { setRefreshPosts } from "../../features/post/postSlice";
 
 const Post: FC<PostProps> = (props: PostProps) => {
   const dispatch = useAppDispatch();
+  const { refresh_posts } = useAppSelector(state => state);
+  
   const [openModal, setOpenModal] = useState(false);
   let created_at = format_date(props.created_at);
   let updated_at = format_date(props.updated_at);
@@ -25,10 +27,10 @@ const Post: FC<PostProps> = (props: PostProps) => {
     ev.target.src = fallback;
   };
 
-  let remove = (id: number) => {
-    axios.delete(`${API_URL}/${id}`).then(() => {
-      alert("Post deleted!");
-      document.location.reload();
+  let removeAndRefresh = (id: number) => {
+    remove(id)
+    .then((_response) => {
+      dispatch(setRefreshPosts(refresh_posts + 1));
     });
   };
 
@@ -65,7 +67,7 @@ const Post: FC<PostProps> = (props: PostProps) => {
         <Button
           text={"Delete"}
           type={"button"}
-          onClick={() => remove(props.id)}
+          onClick={() => removeAndRefresh(props.id)}
         />
       </div>
 

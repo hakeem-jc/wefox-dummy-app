@@ -8,6 +8,5 @@ export const create = async (values:any, helpers: FormikHelpers<any>, current_po
         alert("New Post Created");
         helpers.setSubmitting(false);
         helpers.resetForm({ values: current_post  });
-        // document.location.reload();
       });
 }
