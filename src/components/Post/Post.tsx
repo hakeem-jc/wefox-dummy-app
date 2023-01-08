@@ -32,8 +32,7 @@ const Post: FC<PostProps> = (props: PostProps) => {
     });
   };
 
-  let update = async (id: number) => {
-    // TDODO - Switch to thunk
+  let view = async (id: number) => {
     let post = await show(id);
     dispatch(setFormType(FormType.UPDATE));
     dispatch(setPost(post));
@@ -57,7 +56,7 @@ const Post: FC<PostProps> = (props: PostProps) => {
         <Button
           text={"View"}
           type={"button"}
-          onClick={() => update(props.id)}
+          onClick={() => view(props.id)}
         />
         <Button
           text={"Delete"}
