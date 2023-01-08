@@ -19,3 +19,7 @@
   outline-color: #2e92da;
   background-color: rgb(255, 255, 255);
 }
+
+.post-form__error_text {
+  color: red;
+}
