@@ -1,21 +1,28 @@
 import { FC, ReactNode } from "react";
 import './Modal.css';
-
+import { useAppSelector, useAppDispatch  } from "../../common/hooks";
+import { setIsOpen } from "../../features/modal/modalSlice";
 
 interface ModalProps {
-    isOpen: boolean;
     children: ReactNode;
-    close: () => void;
 }
 
 const Modal:FC<ModalProps> = (props) => {
+  const dispatch = useAppDispatch();
+  const is_open = useAppSelector(state => state.is_open);
+
+  const close = () => {
+    dispatch(setIsOpen(false));
+  }
 
     return (
         <>
-            {props.isOpen &&
+            {is_open  &&
                 <section className="modal">
                     <div className="modal__content">
-                        <span className="modal__close-btn" onClick={()=>props.close()}>&times;</span>
+                        <div className="modal__close-btn-container">
+                            <span className="modal__close-btn" onClick={()=>close()}>&times;</span>
+                        </div>
                         {props.children}
                     </div>
                 </section>

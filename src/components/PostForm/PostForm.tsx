@@ -61,7 +61,10 @@ const PostForm: FC = () => {
   return (
     <div className="post-form">
       
-      <h1 className="post-form__title">New</h1>
+      <div className="post-form__title-container">
+        <h1 className="post-form__title">New</h1>
+      </div>
+      
       <Formik initialValues={current_post} validationSchema={ValidationSchema} onSubmit={onSubmit}>
       {({ errors, touched }) => (
         <Form className="post-form__form">

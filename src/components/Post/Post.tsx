@@ -5,8 +5,6 @@ import Button from "../Button/Button";
 import { PostProps } from "../../interfaces/post";
 import { format_date } from "../../common/helpers";
 import { show } from "../../api/show";
-import Modal from "../Modal/Modal";
-import PostForm from "../PostForm/PostForm";
 import { useAppDispatch,useAppSelector } from "../../common/hooks";
 import { setFormType } from "../../features/form/formSlice";
 import { FormType } from "../../interfaces/form_values";
@@ -44,10 +42,7 @@ const Post: FC<PostProps> = (props: PostProps) => {
 
   return (
     <div className="post">
-      <Modal isOpen={openModal} close={()=>setOpenModal(false)}>
-        <PostForm />
-      </Modal>
-
+  
       <img
         src={props.image_url}
         className="post__image"
