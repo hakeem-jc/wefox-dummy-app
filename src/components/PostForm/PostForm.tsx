@@ -8,6 +8,7 @@ import { API_URL } from "../../common/constants";
 import { useAppSelector } from "../../common/hooks";
 import { FormType } from "../../interfaces/form_values";
 import * as yup from 'yup';
+import { create } from "../../api/create";
 const isUrl = require("is-valid-http-url");
 
 const PostForm: FC = () => {
@@ -15,16 +16,9 @@ const PostForm: FC = () => {
   const form_type = useAppSelector(state => state.form_type);
 
   const onSubmit = (values: any, helpers: FormikHelpers<any>) => {
-    console.log(helpers);
+  
     if (form_type === FormType.NEW){
-      // TODO - Check values being sent vs the actual thing
-      axios.post(API_URL, values).then((_response) => {
-        // TODO - Add to memory 
-        alert("New Post Created");
-        helpers.setSubmitting(false);
-        helpers.resetForm({ values: current_post  });
-        document.location.reload();
-      });
+      create(values, helpers,current_post);
     } else {
       
       let payload = {
@@ -50,19 +44,26 @@ const PostForm: FC = () => {
    content: yup.string()
       .max(50, 'Content can\'t be longer than 50 characters')
       .required('Required'),
-    lat: yup.string()
+    lat: yup.number()
       .max(50, 'Latitude coordinates can\'t be longer than 50 characters')
       .required('Required'),
-    long: yup.string()
+    long: yup.number()
       .max(50, 'Longitude coordinates can\'t be longer than 50 characters')
       .required('Required'),
     image_url: yup.string()
-      .max(50, 'Titles can\'t be longer than 50 characters')
-      .test(url => {
-        if (isUrl(url)) {
-          // @ts-ignore
-          return this.createError({ message: 'Invalid URL'});
-        }})
+    .test(url=>{
+      if (url) {
+        return isUrl(url);
+      }
+    })
+
+
+
+      // .test(url => {
+      //   if (isUrl(url)) {
+      //     // @ts-ignore
+      //     // return this.createError({ message: 'Invalid URL'});
+      //   }})
       .required('Required'),
   
   });
