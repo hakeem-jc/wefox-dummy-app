@@ -2,7 +2,7 @@ import { API_URL } from "../common/constants";
 import axios from 'axios';
 
 export const list = async () => {
-    return axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/posts`)
+    return axios.get(`${API_URL}`)
     .then(response => {
       return response.data;
     })

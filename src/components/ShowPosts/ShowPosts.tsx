@@ -17,7 +17,7 @@ const ShowPosts: FC = () => {
       setIsLoading(false);
       dispatch(setPosts(response));
     });
-  }, [refresh_posts]);
+  }, [dispatch,refresh_posts]);
 
   const Posts =
     posts !== null && posts !== undefined && posts.length !== 0 ? (

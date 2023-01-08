@@ -2,8 +2,6 @@ import { FC } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import "./PostForm.css";
 import Button from "../Button/Button";
-import axios from "axios";
-import { API_URL } from "../../common/constants";
 // import { FormValues } from "../../interfaces/form_values";
 import { useAppSelector,useAppDispatch } from "../../common/hooks";
 import { FormType } from "../../interfaces/form_values";
