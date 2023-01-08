@@ -6,7 +6,7 @@ import { PostProps } from "../../interfaces/post";
 import { format_date } from "../../common/helpers";
 import axios from "axios";
 import { API_URL } from "../../common/constants";
-import { show } from "../../api/requests";
+import { show } from "../../api/show";
 import Modal from "../Modal/Modal";
 import PostForm from "../PostForm/PostForm";
 import { useAppDispatch } from "../../common/hooks";
@@ -58,7 +58,7 @@ const Post: FC<PostProps> = (props: PostProps) => {
 
       <div className="post__button_container">
         <Button
-          text={"Update"}
+          text={"View"}
           type={"button"}
           onClick={() => update(props.id)}
         />
