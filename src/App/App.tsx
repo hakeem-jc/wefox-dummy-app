@@ -7,6 +7,10 @@ import PostForm from "../components/PostForm/PostForm";
 import Post from "../components/Post/Post";
 import { useAppSelector, useAppDispatch } from "../common/hooks";
 import { setIsOpen, setModalType } from "../features/modal/modalSlice";
+import { setFormType } from "../features/form/formSlice";
+import { FormType } from "../interfaces/form_values";
+import { EMPTY_POST } from "../common/constants";
+import { setPost } from "../features/post/postSlice";
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -14,6 +18,8 @@ const App: FC = () => {
 
   const openModal = () => {
     dispatch(setIsOpen(true));
+    dispatch(setPost(EMPTY_POST));
+    dispatch(setFormType(FormType.NEW));
     dispatch(setModalType('new_post'));
 }
 

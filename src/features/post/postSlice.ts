@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { PostProps } from "../../interfaces/post";
 // import { FormValues } from '../../interfaces/form_values';
+
+
 
 const setPostSlice = createSlice({
   name: "post",
@@ -15,7 +18,7 @@ const setPostSlice = createSlice({
     updated_at: "",
   },
   reducers: {
-    setPost(_state, action: PayloadAction) {
+    setPost(_state, action: PayloadAction<PostProps>) {
       return action.payload;
     },
   },
@@ -40,6 +43,7 @@ const setRefreshPostsSlice = createSlice({
     },
   },
 });
+
 
 
 export const { setPost } = setPostSlice.actions;

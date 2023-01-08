@@ -11,12 +11,12 @@ import { FormType } from "../../interfaces/form_values";
 import { setPost } from "../../features/post/postSlice";
 import { remove } from "../../api/remove";
 import { setRefreshPosts } from "../../features/post/postSlice";
+import { setIsOpen } from "../../features/modal/modalSlice";
 
 const Post: FC<PostProps> = (props: PostProps) => {
   const dispatch = useAppDispatch();
   const { refresh_posts } = useAppSelector(state => state);
-  
-  const [openModal, setOpenModal] = useState(false);
+
   let created_at = format_date(props.created_at);
   let updated_at = format_date(props.updated_at);
   
@@ -37,7 +37,7 @@ const Post: FC<PostProps> = (props: PostProps) => {
     let post = await show(id);
     dispatch(setFormType(FormType.UPDATE));
     dispatch(setPost(post));
-    setOpenModal(true);
+    dispatch(setIsOpen(true));
   };
 
   return (

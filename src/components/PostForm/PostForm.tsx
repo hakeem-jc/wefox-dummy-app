@@ -9,6 +9,7 @@ import * as yup from 'yup';
 import { create } from "../../api/create";
 import { update } from "../../api/update";
 import { setRefreshPosts } from "../../features/post/postSlice";
+import { setIsOpen } from "../../features/modal/modalSlice";
 const isUrl = require("is-valid-http-url");
 
 
@@ -21,9 +22,11 @@ const PostForm: FC = () => {
     if (form_type === FormType.NEW){
       create(values, helpers,current_post);
       dispatch(setRefreshPosts(refresh_posts + 1));
+      dispatch(setIsOpen(false));
     } else {
       update(values, helpers,current_post);
       dispatch(setRefreshPosts(refresh_posts + 1));
+      dispatch(setIsOpen(false));
     }
   };
 
@@ -64,7 +67,7 @@ const PostForm: FC = () => {
       <div className="post-form__title-container">
         <h1 className="post-form__title">New</h1>
       </div>
-      
+
       <Formik initialValues={current_post} validationSchema={ValidationSchema} onSubmit={onSubmit}>
       {({ errors, touched }) => (
         <Form className="post-form__form">
