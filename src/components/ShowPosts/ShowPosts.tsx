@@ -3,21 +3,21 @@ import "./ShowPosts.css";
 import Post from "../Post/Post";
 import { PostProps } from "../../interfaces/post";
 import { list } from "../../api/list";
-import { setPostList } from "../../features/post/postSlice";
+import { setPosts } from "../../features/post/postSlice";
 import { useAppDispatch, useAppSelector } from "../../common/hooks";
 
 const ShowPosts: FC = () => {
   const dispatch = useAppDispatch();
-  const posts = useAppSelector((state) => state.posts);
+  const { posts, refresh_posts} = useAppSelector((state) => state);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
     list().then((response) => {
       setIsLoading(false);
-      dispatch(setPostList(response));
+      dispatch(setPosts(response));
     });
-  }, []);
+  }, [refresh_posts]);
 
   const Posts =
     posts !== null && posts !== undefined && posts.length !== 0 ? (

@@ -5,23 +5,27 @@ import Button from "../Button/Button";
 import axios from "axios";
 import { API_URL } from "../../common/constants";
 // import { FormValues } from "../../interfaces/form_values";
-import { useAppSelector } from "../../common/hooks";
+import { useAppSelector,useAppDispatch } from "../../common/hooks";
 import { FormType } from "../../interfaces/form_values";
 import * as yup from 'yup';
 import { create } from "../../api/create";
 import { update } from "../../api/update";
+import { setRefreshPosts } from "../../features/post/postSlice";
 const isUrl = require("is-valid-http-url");
 
+
 const PostForm: FC = () => {
-  const current_post = useAppSelector(state => state.current_post);
-  const form_type = useAppSelector(state => state.form_type);
+  const dispatch = useAppDispatch();
+  const { current_post, form_type , refresh_posts} = useAppSelector(state => state);
 
   const onSubmit = (values: any, helpers: FormikHelpers<any>) => {
   
     if (form_type === FormType.NEW){
       create(values, helpers,current_post);
+      dispatch(setRefreshPosts(refresh_posts + 1));
     } else {
       update(values, helpers,current_post);
+      dispatch(setRefreshPosts(refresh_posts + 1));
     }
   };
 

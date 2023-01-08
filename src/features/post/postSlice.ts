@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { PostProps } from "../../interfaces/post";
 // import { FormValues } from '../../interfaces/form_values';
 
 const setPostSlice = createSlice({
@@ -22,18 +21,31 @@ const setPostSlice = createSlice({
   },
 });
 
-const setPostListSlice = createSlice({
+const setPostsSlice = createSlice({
   name: "posts",
   initialState: [],
   reducers: {
-    setPostList(_state, action: PayloadAction) {
+    setPosts(_state, action: PayloadAction) {
       return action.payload;
     },
   },
 });
 
+const setRefreshPostsSlice = createSlice({
+  name: "refresh_posts",
+  initialState: 0,
+  reducers: {
+    setRefreshPosts(_state, action: PayloadAction<number>) {
+      return action.payload;
+    },
+  },
+});
+
+
 export const { setPost } = setPostSlice.actions;
-export const { setPostList } = setPostListSlice.actions;
+export const { setPosts } = setPostsSlice.actions;
+export const { setRefreshPosts } = setRefreshPostsSlice.actions;
 
 export const current_post = setPostSlice.reducer;
-export const posts = setPostListSlice.reducer;
+export const posts = setPostsSlice.reducer;
+export const refresh_posts = setRefreshPostsSlice.reducer;
