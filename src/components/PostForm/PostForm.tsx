@@ -86,10 +86,9 @@ const PostForm: FC = () => {
           <Field id="lat" name="lat" className="post-form__input" />
           {(errors.lat && touched.lat) && <p className="post-form__error_text">{errors.lat}</p>}
 
-          {/* TODO - Use this to test pipeline */}
           <label htmlFor="long">Longitude</label>
           <Field id="long" name="long" className="post-form__input" />
-          {/* {(errors.title && touched.title) && <p className="post-form__error_text">{errors.title}</p>} */}
+          {(errors.long && touched.long) && <p className="post-form__error_text">{errors.long}</p>}
 
           <label htmlFor="image_url">Image URL</label>
           <Field id="image_url" name="image_url" className="post-form__input" />
