@@ -65,7 +65,10 @@ const PostForm: FC = () => {
     <div className="post-form">
       
       <div className="post-form__title-container">
+        {form_type === FormType.NEW ? 
         <h1 className="post-form__title">New</h1>
+        :
+        <h1 className="post-form__title">Update</h1>}
       </div>
 
       <Formik initialValues={current_post} validationSchema={ValidationSchema} onSubmit={onSubmit}>
