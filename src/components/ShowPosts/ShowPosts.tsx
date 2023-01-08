@@ -2,27 +2,26 @@ import { FC, useEffect, useState } from "react";
 import "./ShowPosts.css";
 import Post from "../Post/Post";
 import { PostProps } from '../../interfaces/post';
-import axios from "axios";
+import { list } from "../../api/list";
+import { setPostList } from "../../features/post/postSlice";
+import { useAppDispatch, useAppSelector } from "../../common/hooks";
+
 
 const ShowPosts: FC = () => {
-  const [posts, setPosts] = useState<PostProps[]>();
+  const dispatch = useAppDispatch();
+  const posts = useAppSelector(state => state.post_list);
   const [isLoading, setIsLoading] = useState(true);
 
-  
   useEffect(() => {
-    // TODO -  Add redux toolkit to make state global then export this to api folder
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/posts`)
-    .then(response => {
-      setPosts(response.data);
+    setIsLoading(true);
+    list().then(response => {
       setIsLoading(false);
+      dispatch(setPostList(response));
     })
-    .catch(error => {
-      console.error(error);
-    });
   },[]);
 
   const Posts = (posts !== null && posts !== undefined && posts.length !== 0) ?
-              posts.map((post,index) => {
+                posts.map((post:PostProps,index:number) => {
                 return <Post {...post} key={index}/>;
               })
               :
