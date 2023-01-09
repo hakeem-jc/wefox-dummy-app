@@ -1,9 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { PostProps } from "../../interfaces/post";
-// import { FormValues } from '../../interfaces/form_values';
-
-
 
 const setPostSlice = createSlice({
   name: "post",
