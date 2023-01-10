@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import "./Post.css";
 import fallback from "../../images/fallback.png";
 import Button from "../Button/Button";

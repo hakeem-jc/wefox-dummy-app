@@ -1,10 +1,9 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import "./App.css";
 import ShowPosts from "../components/ShowPosts/ShowPosts";
 import Button from "../components/Button/Button";
 import Modal from "../components/Modal/Modal";
 import PostForm from "../components/PostForm/PostForm";
-import Post from "../components/Post/Post";
 import { useAppSelector, useAppDispatch } from "../common/hooks";
 import { setIsOpen, setModalType } from "../features/modal/modalSlice";
 import { setFormType } from "../features/form/formSlice";
